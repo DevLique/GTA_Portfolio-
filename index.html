@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <div class="container loading">
+        <header>
+            <nav>
+                <ul class="nav-list">
+                    <li class="nav-item active" data-tab="home">Home</li>
+                    <li class="nav-item" data-tab="projects">Projects</li>
+                    <li class="nav-item" data-tab="contact">Contact</li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Home Tab -->
+    <div id="home" class="tab-content active">
+        <h1>Hi! My Name is</h1>
+        
+        <div id="name">
+            <h1 class="name">Angelique Hilario</h1>
+        </div>
+        <h2>I enjoy creating mobile apps that focus on solving real-life problems through innovative and user-friendly solutions. With experience in Python and Java, I have a strong foundation in object-oriented programming (OOP) principles, which I apply to develop efficient and maintainable code. Additionally, I have skills in web development, including HTML and CSS, allowing me to build seamless and responsive interfaces. My passion lies in combining these technologies to deliver impactful mobile applications that enhance everyday experiences.</h2>
+    <!-- You can add welcome text or leave empty -->
+    </div>
+
+
+
+            <!-- Projects Tab -->
+            <div id="projects" class="tab-content">
+                <h2 class="section-title">My Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h3 class="project-title">Golden Arrow ChatBot</h3>
+                        <p class="project-description">A chatbot that helps users find information quickly and easily.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <h3 class="project-title">Mobile UI Design</h3>
+                        <p class="project-description">A comprehensive mobile interface design featuring innovative layouts and seamless user interactions.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Figma</span>
+                            <span class="tech-tag">UI/UX</span>
+                            <span class="tech-tag">Prototyping</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <h3 class="project-title">Brand Identity</h3>
+                        <p class="project-description">Complete brand identity design including logo, color palette, and marketing materials for a tech startup.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Branding</span>
+                            <span class="tech-tag">Logo Design</span>
+                            <span class="tech-tag">Adobe Creative Suite</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Tab -->
+            <div id="contact" class="tab-content">
+                <h2 class="section-title">Lets Get In Touch!</h2>
+                <div class="contact-section">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" id="name" name="name" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea id="message" name="message" class="form-input" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                    
+                    <div id="successMessage" class="success-message hidden">
+                        <span class="success-icon">✓</span>
+                        <p>Thank you <span id="senderName"></span>Your message has been sent successfully.</p>
+        </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("NamI92QRfeRTW6MF0"); // Add your EmailJS public key here
+        })();
+    </script>
+    <script src="index.js"></script>
+</body>
+</html>

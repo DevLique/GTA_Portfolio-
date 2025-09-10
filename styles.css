@@ -166,17 +166,14 @@
 
         /* Make Home tab take full page with background */
         #home {
-            height: 40vh;
             display: flex;
-            align-items: center;
             flex-direction: column;
-            color: white; /* text is readable */
-            gap: 10px;
-            align-items: center;
-            justify-content: center;
-            padding: 50px;
-            margin-top: 30px;
-            overflow: hidden;
+            align-items: center;      /* horizontal center */
+            justify-content: center;  /* vertical center */
+            text-align: center;       /* center text inside elements */
+            gap: 1rem;
+            padding: 40px 20px;
+            min-height: 60vh;         /* adjust as needed (use calc(100vh - headerHeight) if you prefer) */
         }
 
         #home h1 {
@@ -401,6 +398,14 @@
             font-weight: 700;
             color: #f5f4f4;
             margin-bottom: 15px;
+        }
+
+        .project-title a {
+            color: inherit;
+            text-decoration: none;
+        }
+        .project-title a:hover {
+            text-decoration: underline; /* optional: keep this or remove if you never want an underline */
         }
 
         .project-description {

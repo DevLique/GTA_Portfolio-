@@ -372,3 +372,66 @@ document.addEventListener('mousemove', function(e) {
                 }, 3000);
             });
         });
+
+(function setupCertificatesCarousel() {
+    const carousel = document.getElementById('cert-carousel');
+    const track = carousel?.querySelector('.cert-track');
+    if (!carousel || !track) return;
+
+    const slides = Array.from(track.children);
+    let current = 0;
+    const intervalMs = 1500;
+    let timer = null;
+
+    const update = () => {
+        const offset = -current * 100;
+        track.style.transform = `translateX(${offset}%)`;
+    };
+
+    const next = () => {
+        current = (current + 1) % slides.length;
+        update();
+    };
+
+    const prev = () => {
+        current = (current - 1 + slides.length) % slides.length;
+        update();
+    };
+
+    const start = () => {
+        clearInterval(timer);
+        timer = setInterval(next, intervalMs);
+    };
+
+    const stop = () => clearInterval(timer);
+
+    // start auto-rotate
+    start();
+
+    // pause on hover/focus
+    carousel.addEventListener('mouseenter', stop);
+    carousel.addEventListener('mouseleave', start);
+    carousel.addEventListener('focusin', stop);
+    carousel.addEventListener('focusout', start);
+
+    // wire nav buttons
+    const btnPrev = carousel.querySelector('.cert-prev');
+    const btnNext = carousel.querySelector('.cert-next');
+    if (btnPrev) {
+        btnPrev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            prev();
+            start(); // restart timer so user sees change before auto-advance
+        });
+    }
+    if (btnNext) {
+        btnNext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            next();
+            start();
+        });
+    }
+
+    // ensure correct initial position
+    update();
+})();

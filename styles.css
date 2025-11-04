@@ -6,7 +6,24 @@
     font-style: normal;
 }
 
+/* Hide ALL scrollbars globally */
+* {
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* IE and Edge */
+}
 
+*::-webkit-scrollbar {
+    display: none !important; /* Chrome, Safari, Opera */
+    width: 0 !important;
+    height: 0 !important;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
 
 /* Reset and Base Styles */
         * {
@@ -24,6 +41,12 @@
             width: 100%;
             overflow-x: hidden;
             position: relative;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+        
+        body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
         }
 
         body::before {
@@ -45,6 +68,11 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
+        }
+        
+        .container::-webkit-scrollbar {
+            display: none;
         }
 
         /* Header Navigation */
@@ -137,13 +165,16 @@
             flex: 1;
             background: transparent;
             border-radius: 0;
-            padding: 120px 0px 50px 0; /* adjust if you want less spacing */
+            padding: 100px 20px 20px 20px;
             box-shadow: none;
             backdrop-filter: none;
             -webkit-backdrop-filter: none;
             border: none;
-            height: calc(100vh - 120px); /* Full height minus header and padding */
-            overflow-y: auto; /* Enable vertical scrolling */   
+            height: calc(100vh - 100px);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* Tab Content */
@@ -152,11 +183,15 @@
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.6s ease-out;
+            width: 100%;
+            max-width: 1200px;
             height: 100%;
+            overflow: hidden;
         }
 
         .tab-content.active {
-            display: block;
+            display: flex;
+            flex-direction: column;
             opacity: 1;
             transform: translateY(0);
             animation: slideIn 0.6s ease-out forwards;
@@ -183,12 +218,13 @@
         #home {
             display: flex;
             flex-direction: column;
-            align-items: center;      /* horizontal center */
-            justify-content: center;  /* vertical center */
-            text-align: center;       /* center text inside elements */
-            gap: 1rem;
-            padding: 40px 20px;
-            min-height: 60vh;         /* adjust as needed (use calc(100vh - headerHeight) if you prefer) */
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 1.5rem;
+            padding: 20px;
+            height: 100%;
+            overflow: hidden;
         }
 
         #home h1 {
@@ -264,7 +300,7 @@
         .name {
             font-family: 'Pricedown', serif;
             font-weight: 900;
-            font-size: 4em;
+            font-size: 3.5em;
             animation: slideIn 1.5s ease-out forwards;
             opacity: 0;
             transform: translateX(-50px);
@@ -335,22 +371,21 @@
 
         /* Section Titles */
         .section-title {
-            font-size: 7.8em;
+            font-size: 4em;
             font-weight: 700;
-            margin-bottom: 50px;
+            margin-bottom: 20px;
             text-align: center;
             background: linear-gradient(135deg, #00ffff, #ff4da6, #00ffff);
             background-size: 200% auto;
-            padding: 20px 0;
+            padding: 10px 0;
             z-index: 100;
             -webkit-text-fill-color: transparent;
-            position: sticky;
-            top: 0;
             color: transparent;
             background-clip: text;
             -webkit-background-clip: text;
             animation: gradientShift 4s ease infinite;
             filter: drop-shadow(0 0 30px rgba(0, 255, 255, 0.3));
+            flex-shrink: 0;
         }
 
         .section-title::after {
@@ -378,12 +413,20 @@
         }
 
         /* Projects Section */
+        #projects {
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
             padding: 20px;
+            flex: 1;
+            align-items: center;
         }
 
         .project-card {
@@ -392,14 +435,17 @@
                         rgba(255, 255, 255, 0.03));
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 40px;
+            border-radius: 20px;
+            padding: 25px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
                         inset 0 1px 0 rgba(255, 255, 255, 0.1);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid rgba(255, 255, 255, 0.15);
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         
         .project-card::after {
@@ -446,10 +492,10 @@
         }
 
         .project-title {
-            font-size: 1.6em;
+            font-size: 1.3em;
             font-weight: 700;
             color: #ffffff;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             position: relative;
             z-index: 1;
@@ -465,11 +511,12 @@
 
         .project-description {
             color: rgba(255, 255, 255, 0.85);
-            line-height: 1.8;
-            margin-bottom: 25px;
-            font-size: 1.05em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 0.95em;
             position: relative;
             z-index: 1;
+            flex: 1;
         }
 
         .project-tech {
@@ -502,9 +549,20 @@
         }
 
         /* Contact Section */
+        #contact {
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
         .contact-section {
-            max-width: 800px;
+            max-width: 700px;
             margin: 0 auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .contact-info {
@@ -552,13 +610,13 @@
         /* Contact Form */
         .contact-form {
             display: grid;
-            gap: 25px;
+            gap: 15px;
             background: linear-gradient(145deg, 
                         rgba(255, 255, 255, 0.08), 
                         rgba(255, 255, 255, 0.03));
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            padding: 45px;
+            padding: 30px;
             border-radius: 24px;
             border: 1px solid rgba(255, 255, 255, 0.15);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
@@ -579,10 +637,10 @@
         }
 
         .form-input {
-            padding: 18px 20px;
+            padding: 12px 16px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 15px;
-            font-size: 1em;
+            font-size: 0.95em;
             transition: all 0.3s ease;
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
@@ -603,18 +661,18 @@
         }
 
         .form-textarea {
-            min-height: 140px;
-            resize: vertical;
+            min-height: 80px;
+            resize: none;
             font-family: inherit;
         }
 
         .submit-btn {
             background: linear-gradient(135deg, #ff4da6, #e60073);
             color: white;
-            padding: 18px 40px;
+            padding: 14px 35px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 50px;
-            font-size: 1.1em;
+            font-size: 1em;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -881,11 +939,20 @@
             }
 
             .name {
-                font-size: 2.5em;
+                font-size: 2em;
             }
 
             .section-title {
-                font-size: 2.2em;
+                font-size: 2em;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .bio-text {
+                font-size: 0.9em;
             }
 
             .profile-image {
@@ -954,11 +1021,11 @@
 
 .bio-text {
     animation: fadeInUp 1.2s ease-out 0.3s backwards;
-    line-height: 1.8;
-    font-size: 1.1em;
+    line-height: 1.6;
+    font-size: 1em;
     color: white;
-    max-width: 800px;
-    margin: 20px auto;
+    max-width: 700px;
+    margin: 10px auto;
 }
 
 .highlight-skill {

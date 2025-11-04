@@ -22,19 +22,29 @@
         <main>
             <!-- Home Tab -->
             <div id="home" class="tab-content active">
-                <h1>Hi! My Name is</h1>
+                <h1 class="greeting-text">Hi! My Name is</h1>
                 
                 <div id="name">
-                    <h1 class="name">Angelique Hilario</h1>
+                    <h1 class="name typing-effect">Angelique Hilario</h1>
                 </div>
-                <p>I enjoy creating mobile apps that focus on solving real-life problems through innovative and user-friendly solutions. With experience in Python and Java, I have a strong foundation in object-oriented programming (OOP) principles, which I apply to develop efficient and maintainable code. Additionally, I have skills in web development, including HTML and CSS, allowing me to build seamless and responsive interfaces. My passion lies in combining these technologies to deliver impactful mobile applications that enhance everyday experiences.</p>
+                <p class="bio-text">I enjoy creating mobile apps that focus on solving real-life problems through innovative and user-friendly solutions. With experience in <span class="highlight-skill">Python</span> and <span class="highlight-skill">Java</span>, I have a strong foundation in object-oriented programming (OOP) principles, which I apply to develop efficient and maintainable code. Additionally, I have skills in web development, including <span class="highlight-skill">HTML</span> and <span class="highlight-skill">CSS</span>, allowing me to build seamless and responsive interfaces. My passion lies in combining these technologies to deliver impactful mobile applications that enhance everyday experiences.</p>
+                
+                <!-- Floating particles -->
+                <div class="particles">
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                </div>
             </div>
 
             <!-- Projects Tab -->
             <div id="projects" class="tab-content">
-                <h2 class="section-title">My Projects</h2>
-                <div class="projects-grid">
-                    <div class="project-card">
+                <h2 class="section-title animated-title">My Projects</h2>
+                <div class="projects-grid fade-in-grid"></div>
+                    <div class="project-card" data-tilt>
+                        <div class="project-number">01</div>
                         <h3 class="project-title">Golden Arrow ChatBot</h3>
                         <p class="project-description">A chatbot that helps users find information quickly and easily.</p>
                         <div class="project-tech">
@@ -44,7 +54,8 @@
                         </div>
                     </div>
 
-                    <div class="project-card">
+                    <div class="project-card" data-tilt>
+                        <div class="project-number">02</div>
                         <h3 class="project-title">Mobile UI Design</h3>
                         <p class="project-description">A comprehensive mobile interface design featuring innovative layouts and seamless user interactions.</p>
                         <div class="project-tech">
@@ -54,7 +65,8 @@
                         </div>
                     </div>
 
-                    <div class="project-card">
+                    <div class="project-card" data-tilt>
+                        <div class="project-number">03</div>
                         <h3 class="project-title">
                             <a href="https://creative-dusk-602091.netlify.app/" target="_blank" rel="noopener noreferrer">
                                 Weather API
@@ -72,7 +84,7 @@
 
             <!-- Contact Tab -->
             <div id="contact" class="tab-content">
-                <h2 class="section-title">Lets Get In Touch!</h2>
+                <h2 class="section-title animated-title">Lets Get In Touch!</h2>
 
                 <!-- social links (add under the heading) -->
                 <div class="social-links" aria-label="Social links">

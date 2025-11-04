@@ -217,6 +217,8 @@ function updateContactInfo() {
 document.querySelectorAll('.nav-item').forEach(item => {
     item.addEventListener('mouseenter', function() {
         this.style.transform = 'translateY(-3px) scale(1.02)';
+        // Add ripple effect
+        createRipple(this);
     });
     
     item.addEventListener('mouseleave', function() {
@@ -226,9 +228,41 @@ document.querySelectorAll('.nav-item').forEach(item => {
     });
 });
 
-// Enhanced project card interactions
+// Ripple effect function
+function createRipple(element) {
+    const ripple = document.createElement('span');
+    ripple.style.position = 'absolute';
+    ripple.style.borderRadius = '50%';
+    ripple.style.background = 'rgba(255, 255, 255, 0.5)';
+    ripple.style.width = '20px';
+    ripple.style.height = '20px';
+    ripple.style.animation = 'ripple 0.6s ease-out';
+    ripple.style.pointerEvents = 'none';
+    
+    element.style.position = 'relative';
+    element.style.overflow = 'hidden';
+    element.appendChild(ripple);
+    
+    setTimeout(() => ripple.remove(), 600);
+}
+
+// Parallax effect for particles
 document.addEventListener('mousemove', function(e) {
-    const cards = document.querySelectorAll('.project-card');
+    const particles = document.querySelectorAll('.particle');
+    const mouseX = e.clientX / window.innerWidth;
+    const mouseY = e.clientY / window.innerHeight;
+    
+    particles.forEach((particle, index) => {
+        const speed = (index + 1) * 0.5;
+        const x = (mouseX - 0.5) * speed * 50;
+        const y = (mouseY - 0.5) * speed * 50;
+        particle.style.transform = `translate(${x}px, ${y}px)`;
+    });
+});
+
+// Enhanced project card interactions with 3D tilt
+document.addEventListener('mousemove', function(e) {
+    const cards = document.querySelectorAll('.project-card[data-tilt]');
     
     cards.forEach(card => {
         const rect = card.getBoundingClientRect();
@@ -242,11 +276,70 @@ document.addEventListener('mousemove', function(e) {
         const rotateY = (centerX - x) / 10;
         
         if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+            card.style.transition = 'transform 0.1s ease';
+            
+            // Add glow effect
+            card.style.boxShadow = `0 25px 50px rgba(255, 77, 166, 0.3), 
+                                    ${rotateY * 2}px ${rotateX * 2}px 30px rgba(102, 126, 234, 0.2)`;
         } else {
             card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+            card.style.transition = 'transform 0.5s ease';
+            card.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.1)';
         }
     });
+});
+
+// Intersection Observer for scroll animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// Observe all project cards
+document.querySelectorAll('.project-card').forEach(card => {
+    observer.observe(card);
+});
+
+// Add typing effect to name
+const nameElement = document.querySelector('.name');
+if (nameElement) {
+    const text = nameElement.textContent;
+    nameElement.textContent = '';
+    nameElement.style.opacity = '1';
+    
+    let index = 0;
+    function typeWriter() {
+        if (index < text.length) {
+            nameElement.textContent += text.charAt(index);
+            index++;
+            setTimeout(typeWriter, 100);
+        }
+    }
+    
+    setTimeout(typeWriter, 500);
+}
+
+// Smooth scroll reveal for form inputs
+const formInputs = document.querySelectorAll('.form-input');
+formInputs.forEach((input, index) => {
+    input.style.opacity = '0';
+    input.style.transform = 'translateX(-20px)';
+    input.style.transition = 'all 0.5s ease';
+    
+    setTimeout(() => {
+        input.style.opacity = '1';
+        input.style.transform = 'translateX(0)';
+    }, index * 100);
 });
 
         // Contact form handling

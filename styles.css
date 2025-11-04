@@ -821,6 +821,225 @@
     }
 }
 
+/* Dynamic Animations */
+.greeting-text {
+    animation: slideInLeft 1s ease-out;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.bio-text {
+    animation: fadeInUp 1.2s ease-out 0.3s backwards;
+    line-height: 1.8;
+    font-size: 1.1em;
+    color: white;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.highlight-skill {
+    color: #00ffff;
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.highlight-skill:hover {
+    transform: scale(1.1);
+    color: #ff4da6;
+    text-shadow: 0 0 20px rgba(255, 77, 166, 0.8);
+}
+
+/* Floating particles */
+.particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: linear-gradient(135deg, #ff4da6, #e60073);
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: float 6s infinite ease-in-out;
+    box-shadow: 0 0 20px rgba(255, 77, 166, 0.5);
+}
+
+.particle:nth-child(1) {
+    left: 10%;
+    animation-delay: 0s;
+    animation-duration: 8s;
+}
+
+.particle:nth-child(2) {
+    left: 30%;
+    animation-delay: 1s;
+    animation-duration: 6s;
+}
+
+.particle:nth-child(3) {
+    left: 50%;
+    animation-delay: 2s;
+    animation-duration: 7s;
+}
+
+.particle:nth-child(4) {
+    left: 70%;
+    animation-delay: 1.5s;
+    animation-duration: 9s;
+}
+
+.particle:nth-child(5) {
+    left: 90%;
+    animation-delay: 0.5s;
+    animation-duration: 7.5s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateY(-20vh) scale(1);
+    }
+}
+
+/* Animated section titles */
+.animated-title {
+    position: relative;
+    animation: titlePulse 2s ease-in-out infinite;
+}
+
+@keyframes titlePulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+/* Project card numbers */
+.project-number {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #ff4da6, #e60073);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.2em;
+    color: white;
+    box-shadow: 0 5px 20px rgba(255, 77, 166, 0.4);
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Fade in grid animation */
+.fade-in-grid .project-card {
+    opacity: 0;
+    animation: fadeInScale 0.6s ease-out forwards;
+}
+
+.fade-in-grid .project-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.fade-in-grid .project-card:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.fade-in-grid .project-card:nth-child(3) {
+    animation-delay: 0.5s;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Enhanced hover effects for tech tags */
+.tech-tag {
+    position: relative;
+    overflow: hidden;
+}
+
+.tech-tag::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.tech-tag:hover::before {
+    left: 100%;
+}
+
+/* Pulse animation for submit button */
+.submit-btn {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 15px rgba(102, 126, 234, 0);
+    }
+}
+
+.submit-btn:hover {
+    animation: none;
+}
+
 .cv-download {
     text-align: center;
     margin: 12px 0 18px;

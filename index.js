@@ -342,6 +342,91 @@ formInputs.forEach((input, index) => {
     }, index * 100);
 });
 
+// Certificate Carousel Functionality
+(function initCarousel() {
+    const track = document.querySelector('.carousel-track');
+    const slides = Array.from(document.querySelectorAll('.carousel-slide'));
+    const nextBtn = document.querySelector('.next-btn');
+    const prevBtn = document.querySelector('.prev-btn');
+    const indicators = Array.from(document.querySelectorAll('.indicator'));
+    
+    if (!track || slides.length === 0) return;
+    
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+    
+    // Auto-advance carousel
+    let autoPlayInterval = setInterval(nextSlide, 4000);
+    
+    function updateCarousel() {
+        const slideWidth = slides[0].getBoundingClientRect().width;
+        track.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+        
+        // Update indicators
+        indicators.forEach((indicator, index) => {
+            if (index === currentSlide) {
+                indicator.classList.add('active');
+            } else {
+                indicator.classList.remove('active');
+            }
+        });
+    }
+    
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateCarousel();
+    }
+    
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateCarousel();
+    }
+    
+    function goToSlide(index) {
+        currentSlide = index;
+        updateCarousel();
+    }
+    
+    // Event listeners
+    nextBtn.addEventListener('click', () => {
+        nextSlide();
+        resetAutoPlay();
+    });
+    
+    prevBtn.addEventListener('click', () => {
+        prevSlide();
+        resetAutoPlay();
+    });
+    
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            goToSlide(index);
+            resetAutoPlay();
+        });
+    });
+    
+    // Pause on hover
+    const carouselContainer = document.querySelector('.carousel-container');
+    carouselContainer.addEventListener('mouseenter', () => {
+        clearInterval(autoPlayInterval);
+    });
+    
+    carouselContainer.addEventListener('mouseleave', () => {
+        autoPlayInterval = setInterval(nextSlide, 4000);
+    });
+    
+    function resetAutoPlay() {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = setInterval(nextSlide, 4000);
+    }
+    
+    // Handle window resize
+    window.addEventListener('resize', updateCarousel);
+    
+    // Initial update
+    updateCarousel();
+})();
+
         // Contact form handling
         function setupContactForm() {
             const form = document.getElementById('contactForm');
